@@ -26,7 +26,7 @@ namespace FiguraGeometriche
             Console.WriteLine(f);
             Console.WriteLine("----------------------");
             Console.WriteLine("Figura di area massima della Raccolta: ");
-            Console.WriteLine(r.maxAreaCC());
+            Console.WriteLine(r.maxArea());
             Console.WriteLine("----------------------");
             Console.WriteLine("Figura di perimetro minimo della Raccolta: ");
             Console.WriteLine(r.minPerimeter());
@@ -169,21 +169,6 @@ namespace FiguraGeometriche
             return f;
         }
 
-        public FiguraGeometrica maxAreaCC()
-        {
-            FiguraGeometrica f = null;
-            foreach (FiguraGeometrica i in this.l)
-            {
-                foreach (FiguraGeometrica j in this.l)
-                {
-                    if (i.CompareTo(j) > 0)
-                    {
-                        f = i;
-                    }
-                }
-            }
-            return f;
-        }
         public FiguraGeometrica minPerimeter()
         {
             IEnumerator<FiguraGeometrica> en = l.GetEnumerator();
