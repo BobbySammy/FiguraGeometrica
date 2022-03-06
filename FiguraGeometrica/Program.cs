@@ -143,6 +143,31 @@ namespace FiguraGeometriche
             return "Figura: Rettangolo \n Lati: " + bas + ", " + alt + "\n Area: " + this.area() + "\n Perimetro: " + this.perimetro();
         }
     }
+
+    public class Circonferenza : FiguraGeometrica
+    {
+        double raggio;
+
+        public Circonferenza(double r)
+        {
+            this.raggio = r;
+        }
+
+        public override double area()
+        {
+            return Math.PI*(Math.Pow(raggio,2));
+        }
+
+        public override FiguraGeometrica Clone()
+        {
+            return new Circonferenza(this.raggio);
+        }
+
+        public override double perimetro()
+        {
+            return 2*Math.PI*raggio;
+        }
+    }
     public class Raccolta
     {
         List<FiguraGeometrica> l;
