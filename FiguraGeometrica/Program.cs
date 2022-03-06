@@ -14,8 +14,10 @@ namespace FiguraGeometriche
             Raccolta r = new Raccolta();
             Triangolo t = new Triangolo(3, 4, 5, 5);
             Quadrato q = new Quadrato(10);
+            Quadrato q2 = new Quadrato(2);
             Rettangolo f = new Rettangolo(7, 3);
             r.Add(t);
+            r.Add(q2);
             r.Add(q);
             r.Add(f);
 
@@ -30,6 +32,8 @@ namespace FiguraGeometriche
             Console.WriteLine("----------------------");
             Console.WriteLine("Figura di perimetro minimo della Raccolta: ");
             Console.WriteLine(r.minPerimeter());
+            Console.WriteLine("Quadrato di area massima della Raccolta: ");
+            Console.WriteLine(r.maxAreaQuadrato());
             Console.ReadKey();
 
         }
@@ -207,6 +211,19 @@ namespace FiguraGeometriche
                 }
             }
             return f;
+        }
+
+        public Quadrato maxAreaQuadrato()
+        {
+            Quadrato q = (Quadrato)l.Find(q => q is Quadrato);
+            foreach (FiguraGeometrica i in this.l)
+            {
+                if (i is Quadrato)
+                {
+                    q = (i.area() > q.area()) ? (Quadrato)i : q;
+                }
+            }
+            return q;
         }
     }
 }
