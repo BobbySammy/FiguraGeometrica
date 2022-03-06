@@ -36,6 +36,7 @@ namespace FiguraGeometriche
             Console.WriteLine("Quadrato di area massima della Raccolta: ");
             Console.WriteLine(r.maxAreaQuadrato());
             Console.WriteLine("----------------------");
+            //testing git CLI
             Console.ReadKey();
 
         }
