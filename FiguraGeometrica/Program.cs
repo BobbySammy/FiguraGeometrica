@@ -91,18 +91,18 @@ namespace FiguraGeometriche
     }
     public class Triangolo : FiguraGeometrica
     {
-        double bas, b, c, alt;
+        double bas, l1, l2, alt;
         public Triangolo(double b, double c, double bas, double alt)
         {
 
-            this.b = b;
-            this.c = c;
+            this.l1 = b;
+            this.l2 = c;
             this.bas = bas;
             this.alt = alt;
         }
         public override double perimetro()
         {
-            return bas + b + c;
+            return bas + l1 + l2;
         }
         public override double area()
         {
@@ -111,11 +111,11 @@ namespace FiguraGeometriche
 
         public override Triangolo Clone()
         {
-            return new Triangolo(b, c, bas, alt);
+            return new Triangolo(l1, l2, bas, alt);
         }
         public override string ToString()
         {
-            return "Figura: Triangolo \n Lati: " + bas + ", " + b + ", " + c + "\n Area: " + this.area() + "\n Perimetro: " + this.perimetro();
+            return "Figura: Triangolo \n Lati: " + bas + ", " + l1 + ", " + l2 + "\n Area: " + this.area() + "\n Perimetro: " + this.perimetro();
         }
     }
     public class Rettangolo : FiguraGeometrica
@@ -156,9 +156,7 @@ namespace FiguraGeometriche
         }
         public FiguraGeometrica maxArea()
         {
-            IEnumerator<FiguraGeometrica> en = l.GetEnumerator();
-            en.MoveNext();
-            FiguraGeometrica f = en.Current;
+            FiguraGeometrica f = l.First();
             foreach (FiguraGeometrica i in this.l)
             {
                 if (i.CompareTo(f) > 0)
@@ -171,9 +169,7 @@ namespace FiguraGeometriche
 
         public FiguraGeometrica minPerimeter()
         {
-            IEnumerator<FiguraGeometrica> en = l.GetEnumerator();
-            en.MoveNext();
-            FiguraGeometrica f = en.Current;
+            FiguraGeometrica f = l.First();
             foreach (FiguraGeometrica i in this.l)
             {
                 if (i.perimetro() < f.perimetro())
