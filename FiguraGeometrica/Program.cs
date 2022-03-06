@@ -179,5 +179,14 @@ namespace FiguraGeometriche
             }
             return f;
         }
+        public override string ToString()
+        {
+            string s = "";
+            foreach (FiguraGeometrica i in this.l)
+            {
+                s += i;
+            }
+            return s;
+        }
     }
 }
