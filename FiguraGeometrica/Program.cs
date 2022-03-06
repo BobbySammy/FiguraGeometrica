@@ -32,8 +32,10 @@ namespace FiguraGeometriche
             Console.WriteLine("----------------------");
             Console.WriteLine("Figura di perimetro minimo della Raccolta: ");
             Console.WriteLine(r.minPerimeter());
+            Console.WriteLine("----------------------");
             Console.WriteLine("Quadrato di area massima della Raccolta: ");
             Console.WriteLine(r.maxAreaQuadrato());
+            Console.WriteLine("----------------------");
             Console.ReadKey();
 
         }
