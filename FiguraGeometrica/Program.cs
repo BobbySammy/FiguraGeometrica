@@ -13,19 +13,25 @@ namespace FiguraGeometriche
         {
             Raccolta r = new Raccolta();
             Triangolo t = new Triangolo(3, 4, 5, 5);
+            Triangolo t2 = new Triangolo(7, 4, 5, 8);
             Quadrato q = new Quadrato(10);
             Quadrato q2 = new Quadrato(2);
-            Rettangolo f = new Rettangolo(7, 3);
+            Rettangolo r1 = new Rettangolo(7, 3);
+            Rettangolo r2 = new Rettangolo(7, 5);
+            Rettangolo r3 = new Rettangolo(7, 9);
             r.Add(t);
+            r.Add(t2);
             r.Add(q2);
             r.Add(q);
-            r.Add(f);
+            r.Add(r1);
+            r.Add(r2);
+            r.Add(r3);
 
             Console.WriteLine(t);
             Console.WriteLine("----------------------");
             Console.WriteLine(q);
             Console.WriteLine("----------------------");
-            Console.WriteLine(f);
+            Console.WriteLine(r);
             Console.WriteLine("----------------------");
             Console.WriteLine("Figura di area massima della Raccolta: ");
             Console.WriteLine(r.maxArea());
@@ -37,6 +43,9 @@ namespace FiguraGeometriche
             Console.WriteLine(r.maxAreaQuadrato());
             Console.WriteLine("----------------------");
             //testing git CLI
+            Console.WriteLine("Figure di area massima della Raccolta: ");
+            Console.WriteLine(r.maxAreaFigure());
+            Console.WriteLine("----------------------");
             Console.ReadKey();
 
         }
@@ -216,7 +225,7 @@ namespace FiguraGeometriche
             string s = "";
             foreach (FiguraGeometrica i in this.l)
             {
-                s += i;
+                s += i + "\n";
             }
             return s;
         }
@@ -228,10 +237,32 @@ namespace FiguraGeometriche
             {
                 if (i is Quadrato)
                 {
-                    q = (i.CompareTo(q)>1) ? (Quadrato)i : q;
+                    q = (i.CompareTo(q) > 0) ? (Quadrato)i : q;
                 }
             }
             return q;
+        }
+
+        public Raccolta maxAreaFigure()
+        {
+            Raccolta ris = new Raccolta();
+            FiguraGeometrica tmpMax;
+            foreach (FiguraGeometrica f in this.l)
+            {
+                if (ris.l.Find(x => x.GetType() == f.GetType()) == null)
+                {
+                    tmpMax = f;
+                    foreach (FiguraGeometrica i in this.l)
+                    {
+                        if (f.GetType() == i.GetType())
+                        {
+                            tmpMax = (i.CompareTo(tmpMax) > 0) ? i : tmpMax;
+                        }
+                    }
+                    ris.Add(tmpMax);
+                }
+            }
+            return ris;
         }
     }
 }
