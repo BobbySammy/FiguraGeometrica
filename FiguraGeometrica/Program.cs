@@ -228,7 +228,7 @@ namespace FiguraGeometriche
             {
                 if (i is Quadrato)
                 {
-                    q = (i.CompareTo(q)>1) ? (Quadrato)i : q;
+                    q = (i.CompareTo(q)>0) ? (Quadrato)i : q;
                 }
             }
             return q;
