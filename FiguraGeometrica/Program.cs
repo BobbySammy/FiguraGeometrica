@@ -232,7 +232,7 @@ namespace FiguraGeometriche
 
         public Quadrato maxAreaQuadrato()
         {
-            Quadrato q = (Quadrato)l.Find(q => q is Quadrato);
+            Quadrato q = (Quadrato)l.Find(x => x is Quadrato);
             foreach (FiguraGeometrica i in this.l)
             {
                 if (i is Quadrato)
