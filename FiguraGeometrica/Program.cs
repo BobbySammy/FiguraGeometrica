@@ -75,7 +75,8 @@ namespace FiguraGeometriche
             return 1;
         }
     }
-    public class Quadrato : FiguraGeometrica
+
+    /*public class Quadrato : FiguraGeometrica
     {
         double a;
         public Quadrato(double a)
@@ -103,6 +104,34 @@ namespace FiguraGeometriche
         public override string ToString()
         {
             return "Figura: Quadrato \n Lato: " + a + "\n Area: " + this.area() + "\n Perimetro: " + this.perimetro();
+        }
+    }*/
+
+    public class Quadrato: Rettangolo
+    {
+        public Quadrato(double lato) : base(lato, lato) { }
+        
+        public override string ToString()
+        {
+            return "Figura: Quadrato \n Lato: " + this.alt + "\n Area: " + this.area() + "\n Perimetro: " + this.perimetro();
+        }
+    }
+
+    public class Rombo : Quadrato
+    {
+        double diagMag, diagMin;
+        public Rombo(double lato, double diagMag, double diagMin) : base(lato) 
+        {
+            this.diagMag = diagMag;
+            this.diagMin = diagMin;
+        }
+        public override double area()
+        {
+            return (diagMag*diagMin)/2;
+        }
+        public override string ToString()
+        {
+            return "Figura: Rombo \n Lato: " + this.alt + "\n Area: " + this.area() + "\n Perimetro: " + this.perimetro();
         }
     }
     public class Triangolo : FiguraGeometrica
@@ -136,7 +165,7 @@ namespace FiguraGeometriche
     }
     public class Rettangolo : FiguraGeometrica
     {
-        double bas, alt;
+        protected double bas, alt;
         public Rettangolo(double bas, double alt)
         {
             this.bas = bas;
