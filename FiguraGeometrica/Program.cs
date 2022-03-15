@@ -12,13 +12,24 @@ namespace FiguraGeometriche
         static void Main(string[] args)
         {
             Raccolta r = new Raccolta();
-            Triangolo t = new Triangolo(3, 4, 5, 5);
-            Triangolo t2 = new Triangolo(7, 4, 5, 8);
-            Quadrato q = new Quadrato(10);
-            Quadrato q2 = new Quadrato(2);
-            Rettangolo r1 = new Rettangolo(7, 3);
-            Rettangolo r2 = new Rettangolo(7, 5);
-            Rettangolo r3 = new Rettangolo(7, 9);
+            FiguraGeometrica t = new Triangolo(3, 4, 5, 5);
+            FiguraGeometrica t2 = new Triangolo(7, 4, 5, 8);
+            FiguraGeometrica q = new Quadrato(10);
+            FiguraGeometrica q2 = new Quadrato(2);
+            FiguraGeometrica qEx2 = new Quadrato(0);
+            try
+            {
+                FiguraGeometrica qEx = new Quadrato(-8);
+            }
+            catch (ParametroErrato ex)
+            {
+                Console.WriteLine(ex);
+            }
+            FiguraGeometrica r1 = new Rettangolo(7, 3);
+            FiguraGeometrica r2 = new Rettangolo(7, 5);
+            FiguraGeometrica r3 = new Rettangolo(7, 9);
+            //Quadrato qCast = r.toQuadrato(t);
+            //Console.WriteLine(qCast);
             r.Add(t);
             r.Add(t2);
             r.Add(q2);
@@ -26,7 +37,7 @@ namespace FiguraGeometriche
             r.Add(r1);
             r.Add(r2);
             r.Add(r3);
-
+            Console.WriteLine("----------------------");
             Console.WriteLine(t);
             Console.WriteLine("----------------------");
             Console.WriteLine(q);
@@ -81,6 +92,10 @@ namespace FiguraGeometriche
         double a;
         public Quadrato(double a)
         {
+            /*if (a < 1)
+            {
+                throw new ParametroErrato("Lato del quadrato non valido!", a);
+            }*/
             this.a = a;
         }
         public override double perimetro()
@@ -276,8 +291,10 @@ namespace FiguraGeometriche
         {
             Raccolta ris = new Raccolta();
             FiguraGeometrica tmpMax;
+            //Predicate<FiguraGeometrica> p = eTriangolo;
             foreach (FiguraGeometrica f in this.l)
             {
+                //Console.WriteLine(ris.Find(eTriangolo));
                 if (ris.l.Find(x => x.GetType() == f.GetType()) == null)
                 {
                     tmpMax = f;
@@ -292,6 +309,28 @@ namespace FiguraGeometriche
                 }
             }
             return ris;
+        }
+
+        //i predicati lavorano solo su funzioni che hanno come parametro un oggetto
+        //dello stesso tipo definito nel predicato.
+        //La funzione deve essere dichiarata private static bool
+        /*private static bool eTriangolo(FiguraGeometrica f)
+        {
+            return f is Triangolo;
+        }*/
+        public Quadrato toQuadrato(FiguraGeometrica f)
+        {
+            Quadrato q = (Quadrato)f;
+            /*Quadrato q;
+            try
+            {
+                q = (Quadrato)f;
+            }catch(InvalidCastException ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return null;
+            }*/
+            return q;
         }
     }
 }
