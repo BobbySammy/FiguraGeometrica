@@ -262,8 +262,10 @@ namespace FiguraGeometriche
         {
             Raccolta ris = new Raccolta();
             FiguraGeometrica tmpMax;
+            //Predicate<FiguraGeometrica> p = eTriangolo;
             foreach (FiguraGeometrica f in this.l)
             {
+                //Console.WriteLine(ris.Find(eTriangolo));
                 if (ris.l.Find(x => x.GetType() == f.GetType()) == null)
                 {
                     tmpMax = f;
@@ -280,6 +282,13 @@ namespace FiguraGeometriche
             return ris;
         }
 
+        //i predicati lavorano solo su funzioni che hanno come parametro un oggetto
+        //dello stesso tipo definito nel predicato.
+        //La funzione deve essere dichiarata private static bool
+        /*private static bool eTriangolo(FiguraGeometrica f)
+        {
+            return f is Triangolo;
+        }*/
         public Quadrato toQuadrato(FiguraGeometrica f)
         {
             Quadrato q = (Quadrato)f;
