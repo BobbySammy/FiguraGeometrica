@@ -19,10 +19,11 @@ namespace FiguraGeometriche
             //FiguraGeometrica qEx2 = new Quadrato(0);
             Quadrato qCast = null;
             FiguraGeometrica qEx = null;
+            
             try
             {
                 //viene catturata la prima eccezione sollevata
-                qCast = r.toQuadrato(t);
+                qCast = r.toQuadrato(q);
                 qEx = new Quadrato(-8);
             }
             catch (Exception ex)
@@ -35,6 +36,7 @@ namespace FiguraGeometriche
                 if (ex is ParametroErrato)
                 {
                     Console.WriteLine("Lato negativo! Creo un quadrato di lato 1");
+                    Console.WriteLine(ex);
                     qEx = new Quadrato(1);
                 }
             }
@@ -45,33 +47,33 @@ namespace FiguraGeometriche
             //FiguraGeometrica r2 = new Rettangolo(7, 5);
             //FiguraGeometrica r3 = new Rettangolo(7, 9);
             //Quadrato qCast = r.toQuadrato(q);
-            r.Add(t);
-            r.Add(t2);
-            r.Add(q2);
-            r.Add(q);
+            //r.Add(t);
+            //r.Add(t2);
+            //r.Add(q2);
+            //r.Add(q);
             //r.Add(r1);
             //r.Add(r2);
             //r.Add(r3);
-            Console.WriteLine("----------------------");
-            Console.WriteLine(t);
-            Console.WriteLine("----------------------");
-            Console.WriteLine(q);
-            Console.WriteLine("----------------------");
-            Console.WriteLine(r);
-            Console.WriteLine("----------------------");
-            Console.WriteLine("Figura di area massima della Raccolta: ");
-            Console.WriteLine(r.maxArea());
-            Console.WriteLine("----------------------");
-            Console.WriteLine("Figura di perimetro minimo della Raccolta: ");
-            Console.WriteLine(r.minPerimeter());
-            Console.WriteLine("----------------------");
-            Console.WriteLine("Quadrato di area massima della Raccolta: ");
-            Console.WriteLine(r.maxAreaQuadrato());
-            Console.WriteLine("----------------------");
-            //testing git CLI
-            Console.WriteLine("Figure di area massima della Raccolta: ");
-            Console.WriteLine(r.maxAreaFigure());
-            Console.WriteLine("----------------------");
+            //Console.WriteLine("----------------------");
+            //Console.WriteLine(t);
+            //Console.WriteLine("----------------------");
+            //Console.WriteLine(q);
+            //Console.WriteLine("----------------------");
+            //Console.WriteLine(r);
+            //Console.WriteLine("----------------------");
+            //Console.WriteLine("Figura di area massima della Raccolta: ");
+            //Console.WriteLine(r.maxArea());
+            //Console.WriteLine("----------------------");
+            //Console.WriteLine("Figura di perimetro minimo della Raccolta: ");
+            //Console.WriteLine(r.minPerimeter());
+            //Console.WriteLine("----------------------");
+            //Console.WriteLine("Quadrato di area massima della Raccolta: ");
+            //Console.WriteLine(r.maxAreaQuadrato());
+            //Console.WriteLine("----------------------");
+            ////testing git CLI
+            //Console.WriteLine("Figure di area massima della Raccolta: ");
+            //Console.WriteLine(r.maxAreaFigure());
+            //Console.WriteLine("----------------------");
             Console.ReadKey();
 
         }
@@ -108,7 +110,7 @@ namespace FiguraGeometriche
         {
             if (lato < 1)
             {
-                throw new ParametroErrato("Lato del quadrato non valido!", lato);
+                throw new ParametroErrato("Lato del quadrato non valido!", lato);  
             }
         }
         public override Quadrato Clone()
@@ -117,15 +119,8 @@ namespace FiguraGeometriche
         }
         public override bool Equals(object obj)
         {
-            try
-            {
                 Quadrato q = (Quadrato)obj;
                 return true ? base.bas == q.bas : false;
-            }
-            catch (InvalidCastException ex)
-            {
-                return false;
-            }
         }
         public override string ToString()
         {
@@ -354,7 +349,8 @@ namespace FiguraGeometriche
             //try
             //{
             //    q = (Quadrato)f;
-            //}catch(InvalidCastException ex)
+            //}
+            //catch (InvalidCastException ex)
             //{
             //    Console.WriteLine(ex);
             //    return null;
