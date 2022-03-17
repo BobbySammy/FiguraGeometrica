@@ -16,27 +16,41 @@ namespace FiguraGeometriche
             FiguraGeometrica t2 = new Triangolo(7, 4, 5, 8);
             FiguraGeometrica q = new Quadrato(10);
             FiguraGeometrica q2 = new Quadrato(2);
-            FiguraGeometrica qEx2 = new Quadrato(0);
+            //FiguraGeometrica qEx2 = new Quadrato(0);
+            Quadrato qCast = null;
+            FiguraGeometrica qEx = null;
             try
             {
-                FiguraGeometrica qEx = new Quadrato(-8);
+                qCast = r.toQuadrato(t);
+                qEx = new Quadrato(-8);
             }
-            catch (ParametroErrato ex)
+            catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                if (ex is InvalidCastException)
+                {
+                    Console.WriteLine("Casting non corretto! Restituisco un oggetto null");
+                    qCast = null;
+                }
+                if (ex is ParametroErrato)
+                {
+                    Console.WriteLine("Lato negativo! Creo un quadrato di lato 1");
+                    qEx = new Quadrato(1);
+                }
             }
-            FiguraGeometrica r1 = new Rettangolo(7, 3);
-            FiguraGeometrica r2 = new Rettangolo(7, 5);
-            FiguraGeometrica r3 = new Rettangolo(7, 9);
-            //Quadrato qCast = r.toQuadrato(t);
-            //Console.WriteLine(qCast);
+            Console.WriteLine(qCast);
+            Console.WriteLine(qEx);
+            
+            //FiguraGeometrica r1 = new Rettangolo(7, 3);
+            //FiguraGeometrica r2 = new Rettangolo(7, 5);
+            //FiguraGeometrica r3 = new Rettangolo(7, 9);
+            //Quadrato qCast = r.toQuadrato(q);
             r.Add(t);
             r.Add(t2);
             r.Add(q2);
             r.Add(q);
-            r.Add(r1);
-            r.Add(r2);
-            r.Add(r3);
+            //r.Add(r1);
+            //r.Add(r2);
+            //r.Add(r3);
             Console.WriteLine("----------------------");
             Console.WriteLine(t);
             Console.WriteLine("----------------------");
@@ -87,48 +101,34 @@ namespace FiguraGeometriche
         }
     }
 
-    /*public class Quadrato : FiguraGeometrica
+    public class Quadrato: Rettangolo
     {
-        double a;
-        public Quadrato(double a)
+        public Quadrato(double lato) : base(lato, lato) 
         {
-            /*if (a < 1)
+            if (lato < 1)
             {
-                throw new ParametroErrato("Lato del quadrato non valido!", a);
-            }*/
-            this.a = a;
-        }
-        public override double perimetro()
-        {
-            return a * 4;
-        }
-        public override double area()
-        {
-            return a * a;
+                throw new ParametroErrato("Lato del quadrato non valido!", lato);
+            }
         }
         public override Quadrato Clone()
         {
-            return new Quadrato(a);
+            return new Quadrato(base.bas);
         }
-
         public override bool Equals(object obj)
         {
-            Quadrato q = (Quadrato)obj;
-            return true ? this.a == q.a : false;
+            try
+            {
+                Quadrato q = (Quadrato)obj;
+                return true ? base.bas == q.bas : false;
+            }
+            catch (InvalidCastException ex)
+            {
+                return false;
+            }
         }
         public override string ToString()
         {
-            return "Figura: Quadrato \n Lato: " + a + "\n Area: " + this.area() + "\n Perimetro: " + this.perimetro();
-        }
-    }*/
-
-    public class Quadrato: Rettangolo
-    {
-        public Quadrato(double lato) : base(lato, lato) { }
-        
-        public override string ToString()
-        {
-            return "Figura: Quadrato \n Lato: " + this.alt + "\n Area: " + this.area() + "\n Perimetro: " + this.perimetro();
+            return "Figura: Quadrato \n Lato: " + base.alt + "\n Area: " + base.area() + "\n Perimetro: " + base.perimetro();
         }
     }
 
@@ -143,6 +143,21 @@ namespace FiguraGeometriche
         public override double area()
         {
             return (diagMag*diagMin)/2;
+        }
+        public override Rombo Clone()
+        {
+            return new Rombo(base.bas, this.diagMag, this.diagMin);
+        }
+        public override bool Equals(object obj)
+        {
+            try { 
+                Rombo q = (Rombo)obj;
+                return true ? base.bas == q.bas : false;
+            }
+            catch(InvalidCastException ex)
+            {
+                return false;
+            }
         }
         public override string ToString()
         {
@@ -320,17 +335,32 @@ namespace FiguraGeometriche
         }*/
         public Quadrato toQuadrato(FiguraGeometrica f)
         {
-            Quadrato q = (Quadrato)f;
-            /*Quadrato q;
-            try
-            {
+
+            //Quadrato q = (Quadrato)f;
+
+
+            //sollevo l'eccezione
+            Quadrato q;
+            if (!(f is Quadrato))
+                throw new InvalidCastException();
+            else
                 q = (Quadrato)f;
-            }catch(InvalidCastException ex)
-            {
-                Console.WriteLine(ex.ToString());
-                return null;
-            }*/
             return q;
+
+
+            //gestisco l'eccezione nel metodo
+            //Quadrato q;
+            //try
+            //{
+            //    q = (Quadrato)f;
+            //}catch(InvalidCastException ex)
+            //{
+            //    Console.WriteLine(ex);
+            //    return null;
+            //}
+            //return q;
+
+
         }
     }
 }
