@@ -21,6 +21,7 @@ namespace FiguraGeometriche
             FiguraGeometrica qEx = null;
             try
             {
+                //viene catturata la prima eccezione sollevata
                 qCast = r.toQuadrato(t);
                 qEx = new Quadrato(-8);
             }
