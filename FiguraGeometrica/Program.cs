@@ -23,7 +23,7 @@ namespace FiguraGeometriche
             try
             {
                 //viene catturata la prima eccezione sollevata
-                qCast = r.toQuadrato(q);
+                qCast = r.toQuadrato(t);
                 qEx = new Quadrato(-8);
             }
             catch (Exception ex)
@@ -31,6 +31,7 @@ namespace FiguraGeometriche
                 if (ex is InvalidCastException)
                 {
                     Console.WriteLine("Casting non corretto! Restituisco un oggetto null");
+                    Console.WriteLine(ex);
                     qCast = null;
                 }
                 if (ex is ParametroErrato)
@@ -145,15 +146,9 @@ namespace FiguraGeometriche
             return new Rombo(base.bas, this.diagMag, this.diagMin);
         }
         public override bool Equals(object obj)
-        {
-            try { 
-                Rombo q = (Rombo)obj;
-                return true ? base.bas == q.bas : false;
-            }
-            catch(InvalidCastException ex)
-            {
-                return false;
-            }
+        { 
+            Rombo q = (Rombo)obj;
+            return true ? base.bas == q.bas : false;
         }
         public override string ToString()
         {
@@ -338,7 +333,7 @@ namespace FiguraGeometriche
             //sollevo l'eccezione
             Quadrato q;
             if (!(f is Quadrato))
-                throw new InvalidCastException();
+                throw new InvalidCastException("EXCEPTION: Hai provato a fare il casting errato!");
             else
                 q = (Quadrato)f;
             return q;
